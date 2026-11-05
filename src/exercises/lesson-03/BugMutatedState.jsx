@@ -9,12 +9,12 @@
 */
 
 import { useState } from 'react';
+
 export default function BugMutatedState() {
-  let [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   function handleAdd() {
-    count++;
-    setCount(count);
+    setCount((previousCount) => previousCount + 1);
   }
 
   return (
@@ -26,4 +26,7 @@ export default function BugMutatedState() {
 }
 
 // Explanation:
-// (Write your explanation here)
+// The count variable was being incremented directly using count++.
+// React state should be updated through its setter function.
+// Using setCount(previousCount => previousCount + 1)
+// ensures the new count is calculated from the previous state.

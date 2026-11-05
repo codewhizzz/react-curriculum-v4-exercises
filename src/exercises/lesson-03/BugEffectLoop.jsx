@@ -14,11 +14,14 @@ export default function BugEffectLoop() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    setCount(count + 1);
-  });
+    setCount((previous) => previous + 1);
+  }, []);
 
   return <p>Bug 1 Count: {count}</p>;
 }
 
 // Explanation:
-// (Write your explanation here)
+// The useEffect had no dependency array, so it ran after
+// every render. Since it updated count, it caused repeated
+// re-renders. Adding [] prevents the effect from running
+// after every update.
